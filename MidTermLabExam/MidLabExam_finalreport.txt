@@ -1,0 +1,38 @@
+MID TERM LAB EXAM: CODES, TIME DELAY, POWER CONSUMPTION (Devansh Singh Rathore (111701011))::
+
+//Module for 16bit bitwise addition of two binary numbers:
+---------------------------------------------------------------------------------------------
+module sixteen_bit(input [15:0]a,[15:0]b, output [15:0] out, output cout);
+
+wire r1,r2,r3;
+    four_bit F1(a[3:0],b[3:0],0,out[3:0],r1);
+    four_bit F2(a[7:4],b[7:4],r1,out[7:4],r2);
+    four_bit F3(a[11:8],b[11:8],r2,out[11:8],r3);
+    four_bit F4(a[15:12],b[15:12],r3,out[15:12],cout);
+
+endmodule
+
+TIME DELAY: 8.866
+POWER CONSUMPTION: 11.782W
+
+
+//Module for 4bit bitwise addition of two binary numbers using Generate and Propogate logic:
+---------------------------------------------------------------------------------------------
+module four_bit(input [3:0]a, [3:0]b ,input cin,output [3:0] out, output cout);
+
+wire [2:0] C;
+
+assign C[0]=a[0]&b[0] | (a[0]^b[0])&(cin);
+assign C[1]=a[1]&b[1] | (a[1]^b[1])&(a[0]&b[0] | (a[0]^b[0])&(cin));
+assign C[2]=a[2]&b[2] | (a[2]^b[2])&(a[1]&b[1] | (a[1]^b[1])&(a[0]&b[0] | (a[0]^b[0])&(cin)));
+assign cout=a[3]&b[3] | (a[3]^b[3])&(a[2]&b[2] | (a[2]^b[2])&(a[1]&b[1] | (a[1]^b[1])&(a[0]&b[0] | (a[0]^b[0])&(cin))));
+
+assign out[0]=a[0]^b[0]^(cin);
+assign out[1]=a[1]^b[1]^C[0];
+assign out[2]=a[2]^b[2]^C[1];
+assign out[3]=a[3]^b[3]^C[2];
+
+endmodule
+
+TIME DELAY: 5.935
+POWER CONSUMPTION: 2.884W
