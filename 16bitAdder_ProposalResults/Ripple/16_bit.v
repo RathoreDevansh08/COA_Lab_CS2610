@@ -1,6 +1,5 @@
 module main(input [15:0] a,b, output [15:0] S,output cout);
 
-
     wire [15:0] C;
     
     full_adder F1(a[0],b[0],0,S[0],C[0]);
