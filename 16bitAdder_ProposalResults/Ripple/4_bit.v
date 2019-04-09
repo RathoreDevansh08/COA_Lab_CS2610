@@ -1,4 +1,4 @@
-module full_adder(input [3:0] a,b, input cin, output [3:0]  S,output cout);
+module adder(input [3:0] a,b, input cin, output [3:0]  S,output cout);
  wire [3:0]C;
  assign C[0] = (a[0]&b[0]) | (a[0]^b[0])&cin;
  assign C[1] = (a[1]&b[1]) | ((a[1]^b[1])&(a[0]&b[0])) | ((a[1]^b[1])&(a[0]^b[0]))&cin;
